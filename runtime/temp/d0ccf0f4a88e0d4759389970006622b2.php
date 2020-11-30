@@ -1,0 +1,63 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:53:"D:\gwc\public/../application/gwc\view\user\index.html";i:1606705522;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>用户登录系统</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2>用户登录</h2>
+
+    <form>
+        <div class="form-group">
+            <label for="usr">用户名:</label>
+            <input type="text" class="form-control"  id="name">
+            <span id="span1"></span>
+        </div>
+        <div class="form-group">
+            <label for="pwd">手机号:</label>
+            <input type="tel" class="form-control"  id="tel">
+        </div>
+        <input type="submit" value="登录" id="sub">
+    </form>
+</div>
+
+</body>
+</html>
+<script>
+    $(function () {
+        //给提交按钮设置点击事件
+        $("#sub").click(function () {
+            var name = $("#name").val();/*接受收参数*/
+            var tel = $('#tel').val();
+            //验证名字
+           // if (name.length==0){
+           //    alert("名字不能为空")
+           // }
+           // //验证手机号
+           //  if (tel.length==0){
+           //      alert("手机号不能为空")
+           //  }
+            //发送ajax
+            $.ajax({
+                type: "POST",
+                url: "<?php echo url('gwc/User/save'); ?>",
+                data: {name:name,tel:tel},
+                success: function(e){
+                    console.log(e.msg);
+                  if (e.code==200){
+
+                    location.href="http://www.shop.com/gwc/goods/goods"
+                  }
+                }
+            });
+        })
+    })
+</script>
